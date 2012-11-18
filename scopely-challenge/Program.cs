@@ -70,5 +70,10 @@ namespace scopely_challenge
             tree.Insert(@"/home/sports|music/misc|favorites", token => token.Split('|').Permutations().ToArray())
                 .Display();
         }
+
+        static void Part5()
+        {
+
+        }
     }
 }

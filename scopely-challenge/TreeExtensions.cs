@@ -25,16 +25,11 @@ namespace scopely_challenge
             var tree =
                 levels.
                 SelectMany((level, i) => {
-                      return level.
-                                  SelectMany((t, p) => Tuple.Create(i, i > 0 ? levels[i - 1][0] : null, t));
+                    return
+                      level.Select((t, p) => Tuple.Create(i, i > 0 ? levels[i - 1][0] : null, t));
                  });
 
             return new HashSet<Node>(tree);
-        }
-
-        static
-        public IEnumerable<Node> BuildTreeHelper(String[][] tokens)
-        {
         }
 
         static

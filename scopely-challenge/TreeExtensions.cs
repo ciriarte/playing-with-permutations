@@ -25,11 +25,28 @@ namespace scopely_challenge
             var tree =
                 levels.
                 SelectMany((level, i) => {
-                    return
-                      level.Select((t, p) => Tuple.Create(i, i > 0 ? levels[i - 1][0] : null, t));
+                    var results =
+                      level.Select(n => Tuple.Create(i, i > 0 ? levels[i - 1][0] : null, n));
+
+                    IEnumerable<Node> nodes = null;
+                    if (i > 0)
+                        nodes = Expand(i, levels[i-1], level);
+
+                    return nodes ?? results;
                  });
 
             return new HashSet<Node>(tree);
+        }
+
+        static IEnumerable<Node> Expand(Int32 level, string[] parents, string[] children)
+        {
+            foreach (var parent in parents)
+            {
+                foreach (var child in children)
+                {
+                    yield return Tuple.Create(level, parent, child);
+                }
+            }
         }
 
         static

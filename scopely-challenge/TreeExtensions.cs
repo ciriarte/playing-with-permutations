@@ -84,6 +84,28 @@ namespace scopely_challenge
         }
 
         static
+        public String Collapse(this IEnumerable<Node> tree)
+        {
+            var result = new StringBuilder();
+            var orderedNodes =
+            tree.Where(n => !n.Item3.Contains("-"));
+
+            var deepest = tree.Max(n => n.Item1);
+
+            for (int i = 0; i <= deepest; i++)
+            {
+                result.Append("/");
+                var leaves = orderedNodes.Where(n => n.Item1 == i)
+                                         .Select(n => n.Item3.Trim())
+                                         .Distinct()
+                                         .ToArray();
+                result.Append(String.Join("|",leaves));
+            }
+
+            return result.ToString();
+        }
+
+        static
         public void Display(this IEnumerable<Node> tree)
         {
             Contract.Requires(tree != null, String.Format(_mask, "tree"));

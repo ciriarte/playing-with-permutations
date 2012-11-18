@@ -17,6 +17,8 @@ namespace scopely_challenge
             Part3();
 
             Part4();
+
+            Part5();
             Console.ReadLine();
         }
 
@@ -73,7 +75,12 @@ namespace scopely_challenge
 
         static void Part5()
         {
+            Console.WriteLine("Given the following tree");
+            var tree = @"/".BuildTree();
+            tree.Insert(@"/home/sports|music/misc|favorites", token => token.Split('|').Permutations().ToArray())
+                .Display();
 
+            Console.WriteLine("The collapsed tree should be: {0}", tree.Collapse());
         }
     }
 }

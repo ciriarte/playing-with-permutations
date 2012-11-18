@@ -19,6 +19,8 @@ namespace scopely_challenge
             Part4();
 
             Part5();
+
+            Part6();
             Console.ReadLine();
         }
 
@@ -81,6 +83,19 @@ namespace scopely_challenge
                 .Display();
 
             Console.WriteLine("The collapsed tree should be: {0}", tree.Collapse());
+        }
+
+        static void Part6()
+        {
+            Console.WriteLine("Given the following tree");
+            var tree = @"/".BuildTree();
+            tree.Insert(@"/home/sports|music/misc|favorites", token => token.Split('|').Permutations().ToArray())
+                .Display();
+
+            Console.WriteLine("And I look for a synonym of /home/sports/");
+            var synonim = tree.FindFirstSynonym(@"/home/sports");
+
+            Console.WriteLine("Found: {0}", synonim);
         }
     }
 }
